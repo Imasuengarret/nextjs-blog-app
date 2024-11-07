@@ -8,9 +8,11 @@ const LoadDB = async () =>{
     await ConnectDB();
 }
 LoadDB();
-export const GET = (request) =>{
+export const GET =async (request) =>{
     try {
-        return NextResponse.json({msg:'api is available'})
+        
+         const blog = await Blog.find({})
+        return NextResponse.json({data: blog})
     } catch (err) {
         return NextResponse.status(404).json({err: "An error occured"})
     }
@@ -39,6 +41,7 @@ export const POST = async (request) =>{
         }
         await Blog.create(blogData);
         console.log('created');
+
         return NextResponse.json({success: true, msg: 'success'}, {status: 200});
     } catch (err) {
         console.log(err);

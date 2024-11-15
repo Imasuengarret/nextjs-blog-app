@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { stringify } from "postcss";
 
 const BlogSchema = new mongoose.Schema({
     title: {

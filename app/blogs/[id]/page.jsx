@@ -4,17 +4,15 @@ import { assets, blog_data } from "@/assets/assets";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/Component/Footer";
+import axios from "axios";
 
 const page = ({ params }) => {
   const [data, setData] = useState(null);
-  const fetchBlogData = () => {
-    for (let i = 0; i < blog_data.length; i++) {
-      if (Number(params.id) === blog_data[i].id) {
-        setData(blog_data[i]);
-        console.log(blog_data[i]);
-        break;
-      }
-    }
+  const fetchBlogData = async() => {
+   const response = await axios.get(`/api/blogs`, {
+     params: { id: params.id },
+   })
+   setData(response.data);
   };
   useEffect(() => {
     fetchBlogData();
@@ -40,7 +38,7 @@ const page = ({ params }) => {
           </h1>
           <Image
             className="mx-auto mt-6 border border-white rounded-full"
-            src={data.author_img}
+            src={data.authorImg}
             width={60}
             height={60}
             alt=""
@@ -60,54 +58,7 @@ const page = ({ params }) => {
         />
         <h1 className="my-8 text-[26px] font-semibold">Introduction:</h1>
         <p>{data.description}</p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 1: Self-Reflection and Goal Setting
-        </h3>
-        <p className="my-3">
-          Before you can manage your Lifestyle, you must have a clear
-          understanding of what you want to achieve. Start by reflecting on your
-          values, aspirations, and long term goals.
-        </p>
-        <p className="my-3">
-          Before you can manage your Lifestyle, you must have a clear
-          understanding of what you want to achieve. Start by reflecting on your
-          values, aspirations, and long term goals.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 2: Self-Reflection and Goal Setting
-        </h3>
-        <p className="my-3">
-          Before you can manage your Lifestyle, you must have a clear
-          understanding of what you want to achieve. Start by reflecting on your
-          values, aspirations, and long term goals.
-        </p>
-        <p className="my-3">
-          Before you can manage your Lifestyle, you must have a clear
-          understanding of what you want to achieve. Start by reflecting on your
-          values, aspirations, and long term goals.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 3: Self-Reflection and Goal Setting
-        </h3>
-        <p className="my-3">
-          Before you can manage your Lifestyle, you must have a clear
-          understanding of what you want to achieve. Start by reflecting on your
-          values, aspirations, and long term goals.
-        </p>
-        <p className="my-3">
-          Before you can manage your Lifestyle, you must have a clear
-          understanding of what you want to achieve. Start by reflecting on your
-          values, aspirations, and long term goals.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">Conclusion</h3>
-        <p className="my-3">
-          Managing your lifestyle is a journey that requires commitment and self
-          awareness. By following this step-by-step guide, you can take control
-          of your life and make meaningful changes that lead to a more balanced
-          and fufilling lifestyle. Remember that it is okay to seek support and
-          guildiance from professionals or mentors along the way. Your
-          well-being and happiness are worth the effort
-        </p>
+        
         <div className="my-24">
           <p className="text-black font-semibold my-4">
             Share this article on social media
